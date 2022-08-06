@@ -23,6 +23,10 @@ resource "yandex_compute_instance" "bastion-vm" {
     nat       = true # для публичного IP-адреса
   }
 
+  scheduling_policy {
+    preemptible = false # для сдачи задания
+  }
+
 #  scheduling_policy {
 #    preemptible = (terraform.workspace == "stage") ? true : false # прерываемая
 #  }
@@ -58,6 +62,10 @@ resource "yandex_compute_instance" "master-vm" {
     nat       = false
   }
 
+  scheduling_policy {
+    preemptible = false # для сдачи задания
+  }
+
 #  scheduling_policy {
 #    preemptible = (terraform.workspace == "stage") ? true : false # прерываемая
 #  }
@@ -91,6 +99,10 @@ resource "yandex_compute_instance" "worker-vm" {
   network_interface {
     subnet_id = yandex_vpc_subnet.private-subnet[each.key].id
     nat       = false
+  }
+
+  scheduling_policy {
+    preemptible = false # для сдачи задания
   }
 
 #  scheduling_policy {
