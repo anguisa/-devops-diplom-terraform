@@ -25,7 +25,7 @@ workflows:
     plan:
       steps:
         - run: rm -rf .terraform
-        - run: terraform init -backend-config "access_key=$YC_ACCESS_KEY_ID" -backend-config "secret_key=$YC_SECRET_ACCESS_KEY"
+        - run: terraform init -backend-config "access_key=$YC_ACCESS_KEY_ID" -backend-config "secret_key=$YC_SECRET_ACCESS_KEY" -upgrade
         - run: terraform workspace select stage
         - plan:
             extra_args: ["-lock=false"]
@@ -36,7 +36,7 @@ workflows:
     plan:
       steps:
         - run: rm -rf .terraform
-        - run: terraform init -backend-config "access_key=$YC_ACCESS_KEY_ID" -backend-config "secret_key=$YC_SECRET_ACCESS_KEY"
+        - run: terraform init -backend-config "access_key=$YC_ACCESS_KEY_ID" -backend-config "secret_key=$YC_SECRET_ACCESS_KEY" -upgrade
         - run: terraform workspace select prod
         - plan:
             extra_args: ["-lock=false"]
