@@ -14,6 +14,7 @@ resource "yandex_vpc_subnet" "public-subnet" {
 # NAT instance для доступа в интернет
 resource "yandex_compute_instance" "nat-vm" {
   name = "nat-vm-instance"
+  allow_stopping_for_update = true
 
   resources {
     cores  = 2
