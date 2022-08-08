@@ -4,6 +4,7 @@
 resource "yandex_compute_instance" "bastion-vm" {
   name     = "bastion"
   zone     = yandex_vpc_subnet.public-subnet.zone
+  allow_stopping_for_update = true
 
   resources {
     cores  = (terraform.workspace == "stage") ? 2 : 4
@@ -39,11 +40,12 @@ resource "yandex_compute_instance" "master-vm" {
 
   name     = each.key
   zone     = yandex_vpc_subnet.private-subnet[each.key].zone
+  allow_stopping_for_update = true
 
   resources {
-    cores  = (terraform.workspace == "stage") ? 2 : 4
-    memory = (terraform.workspace == "stage") ? 2 : 4
-    core_fraction = (terraform.workspace == "stage") ? 5 : 100
+    cores  = (terraform.workspace == "stage") ? 4 : 6
+    memory = (terraform.workspace == "stage") ? 8 : 12
+    core_fraction = (terraform.workspace == "stage") ? 20 : 100
   }
 
   boot_disk {
@@ -74,11 +76,12 @@ resource "yandex_compute_instance" "worker-vm" {
 
   name     = each.key
   zone     = yandex_vpc_subnet.private-subnet[each.key].zone
+  allow_stopping_for_update = true
 
   resources {
-    cores  = (terraform.workspace == "stage") ? 2 : 4
-    memory = (terraform.workspace == "stage") ? 2 : 4
-    core_fraction = (terraform.workspace == "stage") ? 5 : 100
+    cores  = (terraform.workspace == "stage") ? 4 : 6
+    memory = (terraform.workspace == "stage") ? 8 : 12
+    core_fraction = (terraform.workspace == "stage") ? 20 : 100
   }
 
   boot_disk {
