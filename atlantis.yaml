@@ -9,7 +9,7 @@ projects:
     autoplan:
       when_modified: ["*.tf", "../modules/**/*.tf"]
       enabled: true
-    apply_requirements: [mergeable, approved]
+    apply_requirements: [mergeable] # можно слить, approved убираем, чтобы не требовалось подтверждение ревьюеров
     workflow: stage
   - name: diplom-prod
     dir: infrastructure
