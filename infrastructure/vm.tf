@@ -25,8 +25,12 @@ resource "yandex_compute_instance" "bastion-vm" {
   }
 
   scheduling_policy {
-    preemptible = (terraform.workspace == "stage") ? true : false # прерываемая
+    preemptible = false # для сдачи задания
   }
+
+#  scheduling_policy {
+#    preemptible = (terraform.workspace == "stage") ? true : false # прерываемая
+#  }
 
   metadata = {
     ssh-keys = "my_key:${file("~/.ssh/id_rsa_ya.pub")}"
@@ -61,8 +65,12 @@ resource "yandex_compute_instance" "master-vm" {
   }
 
   scheduling_policy {
-    preemptible = (terraform.workspace == "stage") ? true : false # прерываемая
+    preemptible = false # для сдачи задания
   }
+
+#  scheduling_policy {
+#    preemptible = (terraform.workspace == "stage") ? true : false # прерываемая
+#  }
 
   metadata = {
     ssh-keys = "my_key:${file("~/.ssh/id_rsa_ya.pub")}"
@@ -97,8 +105,12 @@ resource "yandex_compute_instance" "worker-vm" {
   }
 
   scheduling_policy {
-    preemptible = (terraform.workspace == "stage") ? true : false # прерываемая
+    preemptible = false # для сдачи задания
   }
+
+#  scheduling_policy {
+#    preemptible = (terraform.workspace == "stage") ? true : false # прерываемая
+#  }
 
   metadata = {
     ssh-keys = "my_key:${file("~/.ssh/id_rsa_ya.pub")}"
